@@ -1,0 +1,56 @@
+== Troubleshooting
+:nofooter:
+
+=== `/Library/Ruby/Gems/2.6.0/gems/prawn-2.2.2/lib/prawn/font/ttf.rb:246:in `/': nil can't be coerced into Float (TypeError)`
+
+字体不符合要求, 见 https://github.com/asciidoctor/asciidoctor-pdf/blob/master/docs/theming-guide.adoc#preparing-a-custom-font[Preparing a Custom Font]
+
+从 https://fonts.google.com/?category=Monospace[Google Fonts] 选择一款Mono字体
+
+=== 渲染源代码中的中文注释出现问题
+
+https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/data/themes/base-theme.yml[default-theme.yml] 指定M+ 1mn字体, 但未指定 https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/docs/theming-guide.adoc#fallback-fonts[Fallback Fonts]
+
+.default-theme.yml
+[source,yml]
+----
+...
+literal:
+  font_color: B12146
+  font_family: M+ 1mn
+...
+code:
+  font_color: $base_font_color
+  font_family: $literal_font_family
+...
+----
+
+WARNING: https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/docs/theming-guide.adoc#built-in-afm-fonts[Built-in (AFM)] fonts do not use the https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/docs/theming-guide.adoc#fallback-fonts[fallback fonts]. In order for the fallback font to kick in, you must be using a TrueType font.
+
+. 首先要下载 https://fonts.google.com/specimen/Roboto+Mono?category=Monospace[Roboto Mono] 
+. 然后theme文件中注册 https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/docs/theming-guide.adoc#custom-fonts[Custom Fonts]
+. 在theme文件中指定 https://github.com/asciidoctor/asciidoctor-pdf/blob/v1.5.0.beta.7/docs/theming-guide.adoc#fallback-fonts[Fallback Fonts]
+. 可以在theme文件中指定该字体:
+
+[source,yml]
+----
+code:
+  font-family: Roboto Mono
+----
+
+或者, 修改 `/Library/Ruby/Gems/2.6.0/gems/asciidoctor-pdf-1.5.3/data/themes/default-theme.yml` 中的属性
+
+[source,yml]
+----
+...
+literal:
+  font_family: Roboto Mono
+----
+
+=== 中文空格问题
+
+虽然前面已经讨论了中文空格在文字对齐上的问题, 空格作为英文单词分隔符, 在词法分析上有特殊意义, 因此中英文混合在有些情况下仍有些问题, 如
+
+. 链接, 地址必须与前面的汉字要有空格
+. 行内代码, `` 文本必须前后都要空格, 且转换成PDF时存在对齐问题
+

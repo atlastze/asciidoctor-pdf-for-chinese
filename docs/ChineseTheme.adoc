@@ -1,0 +1,46 @@
+== 中文处理
+
+涉及中文处理一般都要费尽周折, LaTex, Pandoc等等都是这样. Asciidoctor-pdf处理中文主要是通过配置theme文件指定字体来实现.
+
+=== 准备字体
+
+可拷贝Windows/Fonts下的中文字体, 但是Asciidoctor PDF不能像浏览器将字体倾斜的功能, 而中文字体一般没有斜体. 网上找到基于Adobe和Google联合发布思源黑体(Source Han Sans或Noto Sans CJK, otf格式)制作了 https://github.com/chloerei/asciidoctor-pdf-cjk-kai_gen_gothic/releases[怀源黑体(ttf格式)], 但是该项目现在停止维护. 
+
+.Google字体下载网址
+
+* https://fonts.google.com/specimen/Roboto[Google Roboto Fonts]
+* https://www.google.com/get/noto/[Google Noto Fonts(含中文)]
+
+=== 自定义主题
+
+新建custom-theme.yml
+
+[source,yml]
+----
+font:
+  catalog:
+    Roboto:
+      normal: Roboto-Regular.ttf
+      italic: Roboto-Italic.ttf
+      bold: Roboto-Bold.ttf
+      bold_italic: Roboto-BoldItalic.ttf
+    Roboto Mono:
+      normal: RobotoMono-Regular.ttf
+      italic: RobotoMono-Italic.ttf
+      bold: RobotoMono-Bold.ttf
+      bold_italic: RobotoMono-BoldItalic.ttf
+    Noto Sans CJK SC:
+      normal: NotoSansCJKsc-Regular.ttf
+      italic: NotoSansCJKsc-Thin.ttf
+      bold: NotoSansCJKsc-Bold.ttf
+      bold_italic: NotoSansCJKsc-Medium.ttf
+  fallbacks: [Noto Sans CJK SC, Roboto]
+base:
+  font_family: Noto Sans CJK SC
+----
+
+[source,adoc]
+$ asciidoctor-pdf -a pdf-theme=custom-theme.yml -a pdf-fontsdir="fonts;GEM_FONTS_DIR" Syntax.adoc
+
+这里NotoSansCJKsc从Google Fonts下载是otf格式的, 需要转换为ttf格式.
+

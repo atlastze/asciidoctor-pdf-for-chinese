@@ -1,0 +1,11 @@
+== 修改绑定字体
+
+可以修改系统中的fonts和themes, 这样执行不需要每次都指定pdf-style和pdf-fontsdir参数
+
+. 将字体拷贝到 `/Library/Ruby/Gems/2.6.0/gems/asciidoctor-pdf-1.5.3/data/fonts`
+. 修改 `/Library/Ruby/Gems/2.6.0/gems/asciidoctor-pdf-1.5.3/data/themes/default-theme.yml`
+
+这样就可以直接运行下面的命令:
+
+[source,bash]
+$ asciidoctor-pdf helloworld.adoc

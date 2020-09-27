@@ -1,0 +1,44 @@
+:scripts: cjk
+
+== 中文换行问题
+
+=== 问题描述
+
+* https://github.com/asciidoctor/asciidoctor-pdf/issues/82
+* https://github.com/asciidoctor/asciidoctor-pdf/issues/1206
+* https://github.com/asciidoctor/asciidoctor-pdf/pull/1355
+
+=== 解决方法
+
+在文档首行添加属性:
+
+[source,adoc]
+----
+:scripts: cjk
+----
+
+或者参考 https://github.com/asciidoctor/asciidoctor-pdf#support-for-non-latin-languages[Support for Non-Latin Languages]
+
+[source,bash]
+----
+$ asciidoctor-pdf -a scripts=cjk -a pdf-theme=default-with-fallback-font document.adoc
+----
+
+=== 测试文本
+
+AsciiDoc is a human-readable document format, semantically equivalent to DocBook XML, but using plain-text mark-up conventions. AsciiDoc documents can be created using any text editor and read “as-is”, or rendered to HTML or any other format supported by a DocBook tool-chain, i.e. PDF, TeX, Unix manpages, e-books, slide presentations, etc.
+
+AsciiDoc 是一个人类可读的文件格式，语义上等同于 DocBook 的 XML，但使用纯文本标记了约定。可以使用任何文本编辑器创建文件把 AsciiDoc 和阅读“原样”，或呈现为HTML 或由 DocBook 的工具链支持的任何其他格式，如 PDF，TeX 的，Unix 的手册页，电子书，幻灯片演示等。
+
+AsciiDoc は、意味的には DocBook XML のに相当するが、プレーン·テキスト·マークアップの規則を使用して、人間が読めるドキュメントフォーマット、である。 AsciiDoc は文書は、任意のテキストエディタを使用して作成され、「そのまま"または、HTML や DocBook のツールチェーンでサポートされている他のフォーマット、すなわち PDF、TeX の、Unix の man ページ、電子書籍、スライドプレゼンテーションなどにレンダリングすることができます。
+
+AsciiDoc 는 의미의 DocBook XML 에 해당하지만 일반 텍스트 마크 업 규칙을 사용하여 사람이 읽을 수있는 문서 형식입니다. AsciiDoc 문서는 텍스트 편집기를 사용하여 생성하고 "있는 그대로"읽거나, HTML 또는 DocBook 을 도구 체인에서 지원하는 다른 형식, 즉 PDF, 텍, 유닉스 맨 페이지, 전자 책, 슬라이드 프리젠 테이션 등을 렌더링 할 수 있습니다.
+
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.
+测试中文和English混合编排。这是中文。This is English. 什么都没有。 *黑体*. _斜体_.

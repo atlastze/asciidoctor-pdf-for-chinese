@@ -1,0 +1,26 @@
+:scripts: cjk
+:toc: left
+
+= Asciidoctor-pdf中文处理
+
+:nofooter:
+:icons: font
+:sectnums:
+:sectlinks:
+:sectnumlevels: 4
+
+:toc-title: 主要内容
+:toclevels: 3
+
+include::GettingStarted.adoc[]
+
+include::ChineseTheme.adoc[]
+
+include::ConvertOTF2TTF.adoc[]
+
+include::BundledFonts.adoc[]
+
+include::LineBreak.adoc[]
+
+include::Troubleshooting.adoc[]
+

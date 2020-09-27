@@ -1,0 +1,56 @@
+== 转换otf到ttf格式
+
+由于asciidoctor-pdf使用了prawn, 后者只能解析ttf格式字体. Asciidoctor作者提到使用fontforge来做格式转换(https://discuss.asciidoctor.org/How-to-generate-fonts-td2358.html[链接]), 但好像转换后的文件出现缺字的情况.
+
+=== 系统要求
+
+. Python3
+. virtualenvwrapper
+
+=== 下载otf格式思源黑体
+
+https://fonts.adobe.com/fonts/source-han-sans-simplified-chinese[*Source Han Sans*] is a sans-serif gothic typeface family created by Adobe and Google. It is also released by Google under the Noto fonts project as  https://www.google.com/get/noto/[*Noto Sans CJK*]. The family includes seven weights, and supports Traditional Chinese, Simplified Chinese, Japanese and Korean. It also includes Latin, Greek and Cyrillic characters from the Source Sans Pro family.
+
+.设计文件
+
+. https://github.com/adobe-fonts/source-han-sans[Adobe Fonts on GitHub]
+. https://github.com/googlefonts/noto-cjk[Google Fonts on GitHub]
+
+
+=== 安装Adobe Font Development Kit for OpenType
+
+The https://github.com/adobe-type-tools/afdko[*Adobe Font Development Kit for OpenType (AFDKO)*], also known as Adobe FDKO or simply AFDKO, is a font development kit (FDK), a set of command-line tools freely distributed by Adobe for editing and verifying OpenType fonts. It does not offer a glyph editor, but focuses on tools for manipulating font metrics, kerning and other OpenType features. AFDKO runs on Microsoft Windows, Linux and macOS, and licensed under the Apache License.
+
+[source,bash]
+----
+$ mkvirtualenv font
+$ pip3 install afdko
+$ which otf2ttf
+/Users/frankshong/.virtualenvs/font/bin/otf2ttf
+$ otf2ttf NotoSansCJKsc-Bold.otf
+WARNING: Dropping glyph names, they do not fit in 'post' table.
+$ otf2ttf NotoSansCJKsc-Regular.otf
+WARNING: Dropping glyph names, they do not fit in 'post' table.
+$ otf2ttf NotoSansCJKsc-Thin.otf
+WARNING: Dropping glyph names, they do not fit in 'post' table.
+$ otf2ttf NotoSansCJKsc-Medium.otf
+WARNING: Dropping glyph names, they do not fit in 'post' table.
+----
+
+上面的WARNING可以忽略
+
+=== 在theme文件中声明字体
+
+|===
+|type | font
+
+|normal 
+|NotoSansCJKsc-Regular
+|italic
+|NotoSansCJKsc-Thin
+|bold
+|NotoSansCJKsc-Bold
+|bold_italic
+|NotoSansCJKsc-Medium
+
+|===

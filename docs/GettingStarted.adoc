@@ -1,0 +1,10 @@
+== Getting Started
+
+以下在macOS环境(其它系统稍有不同, 如Debian gems在 `/var/lib/gems` 或者运行 `gem list -d`):
+
+. 拷贝fonts中的字体(ttf文件)到 `/Library/Ruby/Gems/2.6.0/gems/asciidoctor-pdf-1.5.3/data/fonts`
+. 拷贝fonts中的default-theme.yml, 覆盖 `/Library/Ruby/Gems/2.6.0/gems/asciidoctor-pdf-1.5.3/data/themes/default-theme.yml`, 覆盖前请备份原文件
+. 转换测试文件examples/example.adoc
+
+[source,bash]
+$ asciidoctor-pdf examples/example.adc
